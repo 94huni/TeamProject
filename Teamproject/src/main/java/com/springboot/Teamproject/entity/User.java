@@ -22,7 +22,6 @@ public class User {
     private String id;      //아이디
 
     @Column(nullable = false)
-    @Size(min = 8, max = 15)
     @NotBlank
     private String password;    //비밀번호
 
