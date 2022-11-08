@@ -38,7 +38,7 @@ public class BlogBoard {
     
     private String createDate;  //생성 날짜
 
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Comment> commentList;  //댓글 일대다 관계
 

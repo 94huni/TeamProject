@@ -32,15 +32,15 @@ public class User {
     @OneToOne(mappedBy = "userprofile")
     private Cart cart;      //장바구니 정보
 
-    @OneToMany(mappedBy = "userprofile")
+    @OneToMany(mappedBy = "userprofile", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<BlogBoard> boardList;  //게시판 일대다 관계
 
-    @OneToMany(mappedBy = "userprofile")
+    @OneToMany(mappedBy = "userprofile" ,cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Comment> commentList;  //댓글 일대다 관계
 
-    @OneToMany(mappedBy = "userprofile")
+    @OneToMany(mappedBy = "userprofile" ,cascade = CascadeType.REMOVE)
     private List<Purchase> purchaseList;    //주문 정보 일대다 관계
 
 }

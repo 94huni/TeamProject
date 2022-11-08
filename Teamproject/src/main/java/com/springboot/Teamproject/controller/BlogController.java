@@ -9,8 +9,6 @@ import com.springboot.Teamproject.service.BlogBoardService;
 import com.springboot.Teamproject.service.CommentService;
 import com.springboot.Teamproject.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -21,7 +19,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.security.Principal;
 import java.util.List;
 

@@ -35,4 +35,9 @@ public class UserService {
         else
             throw new DataNotFoundException("유저를 찾을 수 없습니다");
     }
+
+    public void delete(User user){
+
+        this.userRepository.delete(user);
+    }
 }
