@@ -53,7 +53,13 @@ public class BlogBoardService {
             String savedName = uuid + extension;
             String savedPath = fileDir + savedName;
 
-            files.transferTo(new File(savedPath));
+            File _file = new File(savedPath);
+
+            if(_file.mkdirs())
+                files.transferTo(_file);
+            else
+                files.transferTo(_file);
+
 
             ImageFile file = new ImageFile();
             file.setOriginName(origName);
