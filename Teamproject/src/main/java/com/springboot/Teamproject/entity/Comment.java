@@ -18,6 +18,10 @@ public class Comment {
     private int cno;        //댓글 번호
 
     private String comment; //댓글 내용
+    
+    private String writer;  //댓글 작성자
+    
+    private String createDate;  //댓글 작성 날짜
 
     @ManyToOne
     @JoinColumn(name = "board_id")

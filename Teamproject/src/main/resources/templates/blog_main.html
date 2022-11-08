@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+</head>
+<body>
+<h1 th:text="${blogBoard.title}"></h1>
+<div th:each="imageFile : ${fileList}">
+    <img src="/img/${imageFile.savedName}" width="150" height="150"/>
+</div>
+<div th:text="${blogBoard.content}"></div>
+<div th:text="${blogBoard.writer}"></div>
+<a sec:authorize="isAuthenticated()"
+   th:if="${blogBoard.userprofile != null and #authentication.getPrincipal().getUsername() == blogBoard.userprofile.id}"
+   th:href="@{|/blog/modify/${blogBoard.bno}|}"><button type="button">수정</button></a>
+<a sec:authorize="isAuthenticated()"
+   th:if="${blogBoard.userprofile != null and #authentication.getPrincipal().getUsername() == blogBoard.userprofile.id}"
+   th:href="@{|/blog/delete/${blogBoard.bno}|}"><button type="button">삭제</button></a>
+<br>
+<div>
+    댓글<br>
+    <table>
+        <tbody>
+        <tr th:each="comment : ${commentList}">
+            <td th:text="${comment.writer}"></td>
+            <td th:text="${comment.comment}"></td>
+            <td th:text="${comment.createDate}"></td>
+            <td><a sec:authorize="isAuthenticated()"
+                   th:if="${comment.userprofile != null and #authentication.getPrincipal().getUsername() == comment.userprofile.id}"
+                   th:href="@{|/comment/delete?cno=${comment.cno}&bno=${blogBoard.bno}|}"><button type="button">x</button></a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <form th:action="@{/comment/create}" th:object="${CommentCreateForm}" method="post">
+            <textarea name="comment" rows="10" cols="100"></textarea>
+            <input type="hidden" name="bno" th:value="${blogBoard.bno}">
+            <input sec:authorize="isAuthenticated()" type="submit" value="등록">
+        </form>
+    </div>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일시</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blogBoard : ${blogBoardList}">
+        <td>
+            <a th:href="@{|/blog/list/${blogBoard.bno}|}" th:text="${blogBoard.title}"></a>
+        </td>
+        <td th:text="${blogBoard.writer}"></td>
+        <td th:text="${blogBoard.createDate}"></td>
+    </tr>
+    </tbody>
+</table>
+<a sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+<a sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+<a sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+<a sec:authorize="isAuthenticated()" th:href="@{/blog/create}">글쓰기</a>
+</body>
+</html>

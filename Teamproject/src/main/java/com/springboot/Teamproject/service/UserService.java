@@ -1,11 +1,14 @@
 package com.springboot.Teamproject.service;
 
+import com.springboot.Teamproject.DataNotFoundException;
 import com.springboot.Teamproject.entity.User;
 import com.springboot.Teamproject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,7 +18,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public User create(String id, String password, String nickname){
+    public void create(String id, String password, String nickname){
 
         User user = new User();
         user.setId(id);
@@ -23,7 +26,13 @@ public class UserService {
         user.setNickname(nickname);
 
         this.userRepository.save(user);
+    }
 
-        return user;
+    public User getUser(String id){
+        Optional<User> user = this.userRepository.findById(id);
+        if(user.isPresent())
+            return user.get();
+        else
+            throw new DataNotFoundException("유저를 찾을 수 없습니다");
     }
 }

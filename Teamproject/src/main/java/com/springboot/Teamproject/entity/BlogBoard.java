@@ -28,7 +28,13 @@ public class BlogBoard {
     @NotBlank
     private String content; //내용
 
-    private String imagePath;   //이미지 경로
+    @Column(nullable = false)
+    @NotBlank
+    private String writer;    //작성자
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<ImageFile> fileList;     //이미지 파일 정보
     
     private String createDate;  //생성 날짜
 

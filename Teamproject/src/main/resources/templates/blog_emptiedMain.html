@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <body>
-<h1>Test</h1>
+<h1>글을 써주세요</h1>
 <a sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
 <a sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
 <a sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+<a sec:authorize="isAuthenticated()" th:href="@{/blog/create}">글쓰기</a>
 </body>
 </html>
