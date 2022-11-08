@@ -8,7 +8,7 @@
 <body>
 <h1 th:text="${blogBoard.title}"></h1>
 <div th:each="imageFile : ${fileList}">
-    <img src="/img/${imageFile.savedName}" width="150" height="150"/>
+    <img th:src="@{|/img/${imageFile.savedName}|}" width="150" height="150"/>
 </div>
 <div th:text="${blogBoard.content}"></div>
 <div th:text="${blogBoard.writer}"></div>
