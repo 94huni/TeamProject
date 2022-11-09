@@ -54,6 +54,7 @@ public class BlogBoardService {
 
             File _file = new File(savedPath);
 
+            //해당 경로의 폴더가 없을 경우 자동으로 폴더 생성 후 정상 작동
             if(_file.mkdirs())
                 files.transferTo(_file);
             else
