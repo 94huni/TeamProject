@@ -3,6 +3,7 @@ package com.springboot.Teamproject.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -25,12 +26,13 @@ public class Product {
     @Column(nullable = false)
     private String discription;  //상품 정보
 
-    private String imagePath;    //상품 이미지 경로
+    @Column(nullable = false)
+    private String imageFileName; //상품 이미지 파일이름
 
     @Column(nullable = false)
-    private String code;    //카테고리 코드
+    private String code;    //카테고리 코드W
 
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;      //장바구니 번호
+    @OneToOne(mappedBy = "product")
+    @ToString.Exclude
+    private Cart cart;      //장바구니 정보
 }

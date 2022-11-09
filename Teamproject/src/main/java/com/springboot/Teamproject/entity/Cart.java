@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cart {
+
     @Id
     private int number;
 
@@ -19,6 +20,7 @@ public class Cart {
     @JoinColumn(name = "User_id")
     private User userprofile;   //유저 정보
 
-    @OneToMany(mappedBy = "cart")
-    private List<Product> productList;    //상품 정보
+    @OneToOne
+    @JoinColumn(name="product_id")
+    private Product product;    //상품 정보
 }
