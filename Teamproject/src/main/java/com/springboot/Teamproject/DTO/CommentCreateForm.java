@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class CommentCreateForm {
 
-    private String comment;
+    private String comment; //댓글 내용
 
-    private int bno;
+    private int bno;        //게시글 번호
 }

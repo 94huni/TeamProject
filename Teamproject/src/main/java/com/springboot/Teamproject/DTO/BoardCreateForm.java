@@ -10,9 +10,9 @@ import java.util.List;
 @Setter
 public class BoardCreateForm {
 
-    private String title;
+    private String title;       //제목
 
-    private String content;
+    private String content;     //내용
 
-    private MultipartFile file;
+    private MultipartFile file;    //이미지 파일
 }

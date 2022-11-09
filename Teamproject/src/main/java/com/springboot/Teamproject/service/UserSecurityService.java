@@ -21,6 +21,7 @@ public class UserSecurityService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
+    //스프링 시큐리티와 연동되는 함수로, 로그인 할 때 아이디와 비밀번호를 비교하여 로그인해줌
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> _user = this.userRepository.findById(username);

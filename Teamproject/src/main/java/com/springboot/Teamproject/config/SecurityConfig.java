@@ -23,21 +23,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
 
+        //어떤 파일이던 접근 가능하도록 허용
         http.authorizeRequests().antMatchers("/**").permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/user/login")
-                .defaultSuccessUrl("/")
+                .loginPage("/user/login")       //로그인 시 매핑
+                .defaultSuccessUrl("/")         //성공 시 매핑
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))    //로그아웃 요청 및 매핑
+                .logoutSuccessUrl("/")      //로그아웃 성공 시 매핑
+                .invalidateHttpSession(true)    //로그인 세션 끊음
         ;
 
         return http.build();
     }
 
+    //비밀번호 암호화 하는 기능
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

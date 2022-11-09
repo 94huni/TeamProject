@@ -26,6 +26,7 @@ public class CommentController {
 
     private final UserService userService;
 
+    //댓글 생성 기능
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
     public String commentCreate(@Valid CommentCreateForm commentCreateForm, Principal principal){
@@ -37,10 +38,13 @@ public class CommentController {
         return "redirect:/";
     }
 
+
+    //댓글 삭제 기능
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete")
     public String commentDelete(@RequestParam int cno, @RequestParam int bno , Principal principal){
 
+        //현재 접속한 유저와 댓글에 등록 한 유저의 id값을 비교
         if(!(this.userService.getUser(principal.getName()) == this.commentService.getComment(cno).getUserprofile()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
 

@@ -20,6 +20,7 @@ public class CommentService {
 
     private final BlogBoardRepository boardRepository;
 
+    //댓글 생성
     public void create(String comment, User user, int bno){
 
         Comment _comment = new Comment();
@@ -32,16 +33,19 @@ public class CommentService {
         this.commentRepository.save(_comment);
     }
 
+    //해당 번호의 게시글에 등록된 댓글 목록 가져옴
     public List<Comment> getList(int bno){
 
         return this.commentRepository.findByboardBno(bno);
     }
 
+    //댓글 삭제
     public void delete(int cno){
 
         this.commentRepository.deleteById(cno);
     }
 
+    //댓글정보를 가져옴
     public Comment getComment(int cno){
 
         return this.commentRepository.findById(cno);

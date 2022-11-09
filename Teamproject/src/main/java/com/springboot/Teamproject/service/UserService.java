@@ -18,6 +18,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    //회원가입 시 적었던 내용으로 유저 정보 등록
     public void create(String id, String password, String nickname){
 
         User user = new User();
@@ -28,6 +29,7 @@ public class UserService {
         this.userRepository.save(user);
     }
 
+    //아이디 정보를 기반으로 유저 정보를 가져옴
     public User getUser(String id){
         Optional<User> user = this.userRepository.findById(id);
         if(user.isPresent())
@@ -36,6 +38,7 @@ public class UserService {
             throw new DataNotFoundException("유저를 찾을 수 없습니다");
     }
 
+    //유저 탈퇴 시 유저 정보를 삭제
     public void delete(User user){
 
         this.userRepository.delete(user);

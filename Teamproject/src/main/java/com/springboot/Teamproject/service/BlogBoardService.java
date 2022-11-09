@@ -30,8 +30,9 @@ public class BlogBoardService {
     private final ImageFileRepository imageFileRepository;
 
     @Value("${file.dir}")
-    private String fileDir;
+    private String fileDir;     //aplication.properties 에 있는 파일 경로 변수 저장
 
+    //게시판 글 생성
     public void create(String title, String content,  MultipartFile files,User user) throws IOException {
 
         BlogBoard board = new BlogBoard();
@@ -43,10 +44,8 @@ public class BlogBoardService {
 
         this.boardRepository.save(board);
 
-        if(files.isEmpty())
-            this.imageFileRepository.save(null);
-
-        else {
+        if(!files.isEmpty())        //이미지 파일이 있는지 확인, 있을 경우에만 파일 정보 등록
+        {
             String origName = files.getOriginalFilename();
             String uuid = UUID.randomUUID().toString();
             String extension = origName.substring(origName.lastIndexOf("."));
@@ -71,16 +70,19 @@ public class BlogBoardService {
         }
     }
 
+    //게시판 글 목록을 게시판 번호 내림차순으로 가져옴
     public List<BlogBoard> getList(){
         return this.boardRepository.findAll(Sort.by(Sort.Direction.DESC,"bno"));
     }
 
+    //해당 번호의 게시판을 직접 가져옴
     public BlogBoard getBlog(int bno){
         Optional<BlogBoard> board = this.boardRepository.findById(bno);
 
         return board.get();
     }
 
+    //게시판 수정
     public void modifyBlog(BlogBoard board , String title, String content){
 
         board.setTitle(title);
@@ -89,11 +91,13 @@ public class BlogBoardService {
         this.boardRepository.save(board);
     }
 
+    //게시판 삭제
     public void deleteBlog(BlogBoard board){
 
         this.boardRepository.delete(board);
     }
 
+    //해당 번호의 게시판에 등록된 이미지 파일 정보를 가져옴
     public List<ImageFile> getImageFiles(int bno){
 
         return this.imageFileRepository.findAllByboardBno(bno);

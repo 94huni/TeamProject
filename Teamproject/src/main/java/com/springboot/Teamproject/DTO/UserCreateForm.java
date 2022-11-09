@@ -9,13 +9,13 @@ import javax.validation.constraints.Size;
 @Getter
 public class UserCreateForm {
 
-    private String id;
+    private String id;      //아이디
 
     @Size(min = 8, max = 15)
-    private String password1;
+    private String password1;   //비밀번호
 
     @Size(min = 8, max = 15)
-    private String password2;
+    private String password2;   //비밀번호 확인
 
-    private String nickname;
+    private String nickname;    //닉네임
 }
